@@ -23,7 +23,10 @@
                     }
                   });
         var allInt = smart.patient.api.fetchAll ({
-                    type: 'AllergyIntolerance'
+                    type: 'AllergyIntolerance',
+                    query: {
+                        'clinical-status': 'active'
+                    } 
                   });          
 
         $.when(pt, obv, allInt).fail(onError);

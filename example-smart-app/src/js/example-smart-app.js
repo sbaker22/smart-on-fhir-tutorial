@@ -79,7 +79,8 @@
             }
             p.allergyInt += '</td></tr>';
           });
-          p.allergyInt += '</table>'      
+          p.allergyInt += '</table>' ;
+          console.log(p.allergyInt);
           ret.resolve(p);
         });
       } else {

@@ -22,13 +22,13 @@
                       }
                     }
                   });
-        var all = smart.patient.api.fetchAll ({
+        var allInt = smart.patient.api.fetchAll ({
                     type: 'AllergyIntolerance'
                   });          
 
-        $.when(pt, obv, all).fail(onError);
+        $.when(pt, obv, allInt).fail(onError);
 
-        $.when(pt, obv, all).done(function(patient, obv, all) {
+        $.when(pt, obv, allInt).done(function(patient, obv, allInt) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
@@ -67,7 +67,21 @@
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
           p.temp = getQuantityValueAndUnit(temp[0]);
-
+          p.allergyInt = '<table>';
+          allInt.forEach(function(ai) {
+            p.allergyInt += '<tr><td>' + ai.code.text + ' (' + ai.critcality + ')</td><td>';
+            if(typeof ai.reaction != 'undefined') {
+              ai.reaction.forEach(function(ri) {
+                ri.manifestation.forEach(function(mi) {
+                  p.allergyInt += mi.text + ' (' + ri.severity + ')<br />';
+                });
+              });
+            } else {
+                  p.allergyInt += '&nbsp;';
+            }
+            p.allergyInt += '</td></tr>';
+          });
+          p.allergyInt += '</table>'      
           ret.resolve(p);
         });
       } else {
@@ -92,6 +106,7 @@
       ldl: {value: ''},
       hdl: {value: ''},
       temp: {value: ''},
+      allergyInt: {value: ''}
     };
   }
 
@@ -136,6 +151,7 @@
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
     $('#temp').html(p.temp);
+    $('#allergyIntolerance').html(p.allergyInt);
   };
 
 })(window);

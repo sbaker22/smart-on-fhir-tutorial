@@ -68,6 +68,7 @@
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
           p.temp = getQuantityValueAndUnit(temp[0]);
+          console.log(allInt);
           p.allergyInt = '<table>';
           allInt.forEach(function(ai) {
             p.allergyInt += '<tr><td>' + ai.code.text + ' (' + ai.criticality + ')</td><td>';

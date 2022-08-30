@@ -67,7 +67,7 @@
           p.temp = getQuantityValueAndUnit(temp[0]);
           p.allergyInt = '<table>';
           allInt.forEach(function(ai) {
-            p.allergyInt += '<tr><td>' + ai.code.text + ' (' + ai.critcality + ')</td><td>';
+            p.allergyInt += '<tr><td>' + ai.code.text + ' (' + ai.criticality + ')</td><td>';
             if(typeof ai.reaction != 'undefined') {
               ai.reaction.forEach(function(ri) {
                 ri.manifestation.forEach(function(mi) {

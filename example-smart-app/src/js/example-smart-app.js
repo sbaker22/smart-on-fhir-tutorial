@@ -71,6 +71,7 @@
           console.log(allInt);
           p.allergyInt = '<table>';
           allInt.forEach(function(ai) {
+            if(ai.criticality == 'unable-to-assess') {continue; }
             p.allergyInt += '<tr><td>' + ai.code.text + ' (' + ai.criticality + ')</td><td>';
             if(typeof ai.reaction != 'undefined') {
               ai.reaction.forEach(function(ri) {

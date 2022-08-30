@@ -22,10 +22,13 @@
                       }
                     }
                   });
+        var all = smart.patient.api.fetchAll ({
+                    type: 'AllergyIntolerance'
+                  });          
 
-        $.when(pt, obv).fail(onError);
+        $.when(pt, obv, all).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv, all).done(function(patient, obv, all) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
@@ -43,6 +46,8 @@
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
           var temp = byCodes('8310-5');
+          
+          console.log(all);
 
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
